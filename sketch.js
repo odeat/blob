@@ -13,25 +13,24 @@ function setup() {
     let gravity = new GravityBehavior(new Vec2D(0,1));
     physics.addBehavior(gravity);
 
-    let bounds = new Rect(0, 0, width, height);
+    let bounds = new Rect(0, 0, width - 10, height -10 ); // define the bounds of the physics world
     physics.setWorldBounds(bounds);
 
-// Particles
-    particleA = new VerletParticle2D(285, 285);
-    physics.addParticle(particleA);
+    // particles
+    particleA = new Particle(325, 285);
+    particleB = new Particle(320, 385);
+    particleC = new Particle(150, 485);
 
-    particleB = new VerletParticle2D(286, 385);
-    physics.addParticle(particleB);
+    // springs
+    spring1 = new Spring(particleA, particleB, 100, 0.5); // px lengte, 0.5 sterkte
+    spring2 = new Spring(particleB, particleC, 100, 0.5);
+    spring3 = new Spring(particleA, particleC, 100, 0.5);
 
-  particleC = new VerletParticle2D(286, 485);
-    physics.addParticle(particleC);
-
-    spring1 = new VerletSpring2D(particleA, particleB, 100, 0.5); // px lengte, 0.5 sterkte\
+    // Add springs to the physics simulation
     physics.addSpring(spring1);
-
-    spring2 = new VerletSpring2D(particleB, particleC, 100, 0.5);
     physics.addSpring(spring2);
-  }
+    physics.addSpring(spring3);
+}
   
   function draw() {
     background(122);
@@ -44,10 +43,9 @@ function setup() {
       particleA.unlock(); // unlocks particleA 
     }
 
-    fill("#F652A0"); // colors of the particles
-    circle(particleA.x, particleA.y, 15);
-    circle(particleB.x, particleB.y, 15);
-    circle(particleC.x, particleC.y, 15);
+    particleA.show(); 
+    particleB.show(); 
+    particleC.show(); 
 
     line(particleA.x, particleA.y, particleB.x, particleB.y); // line between particles
     line(particleB.x, particleB.y, particleC.x, particleC.y);
