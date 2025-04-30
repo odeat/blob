@@ -1,6 +1,6 @@
 class Particle extends toxi.physics2d.VerletParticle2D {
     constructor(x, y) {
-        super(x, y); // Call the parent class constructor
+        super(x, y);
         this.r = 8;
         physics.addParticle(this);
     }

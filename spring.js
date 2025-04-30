@@ -1,6 +1,6 @@
 class Spring extends toxi.physics2d.VerletSpring2D {
     constructor(a, b, length, strength) {
-        super(a, b, length, strength); // Call the parent class constructor
+        super(a, b, length, strength);
     }
 
     show() {
