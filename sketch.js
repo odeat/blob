@@ -4,12 +4,23 @@ const { Vec2D, Rect } = toxi.geom;
 
 let physics;
 
+
+let holdParticle = null;
+let isHoldingBlob = false;
+let radius = 100;
 let currentEmote = ""
 let touchedEmote = "˶ˆᗜˆ˵"
 let looseEmote = "•⩊•"
 let emotes = ["╥﹏╥", "•⩊•", "〇_ｏ"]
 let particles = [];
 let springs = [];
+
+let mySound;
+
+function preload() {
+  soundFormats('mp3', 'ogg');
+  mySound = loadSound('/yoshi-tongue.mp3');
+}
 
 function setup() {
     createCanvas(600, 600);
@@ -25,7 +36,7 @@ function setup() {
     physics.setWorldBounds(bounds);
  
     // particle forloop down here:
-    let start = createVector(100, 0)
+    let start = createVector(radius, 0)
     let particleCount = 20;
     let draaihoek = PI * 2 / particleCount
     
@@ -70,16 +81,51 @@ function draw() {
     }
 
     // Lock the first particle to the mouse position when pressed
-    if (mouseIsPressed) {
+    if (isHoldingBlob) {
         currentEmote = touchedEmote;
-        particles[0].lock();
-        particles[0].x = mouseX;
-        particles[0].y = mouseY;
-        particles[0].unlock();
+        holdParticle.lock();
+        holdParticle.x = mouseX;
+        holdParticle.y = mouseY;
+        holdParticle.unlock();
     } else{
         currentEmote = looseEmote
     }
+    
+    let middle = calculateMiddle();
+    fill(0)
+    textSize(30)
+    text(currentEmote, middle.x, middle.y)
+}
 
+function mousePressed(){
+    // console.log("Click")
+    let middle = calculateMiddle();
+    let mousePos = createVector(mouseX, mouseY);
+    let lengte = distance(mousePos, middle);
+
+    if(lengte < radius){
+        isHoldingBlob = true;
+        mySound.play();
+    }
+    
+    let sortedParticles = particles.slice().sort((a, b)=>{
+        a = createVector(a.x, a.y);
+        b = createVector(b.x, b.y);
+        return distance(mousePos, a) - distance(mousePos, b);
+    })
+    holdParticle = sortedParticles[0];
+}
+
+function distance(a, b){
+    let aToB = b.sub(a);
+    return aToB.mag();
+}
+
+function mouseReleased(){
+    isHoldingBlob = false;
+}
+
+function calculateMiddle(){
     let sum = createVector(0, 0) 
     for(let particle of particles){
         sum.x += particle.x
@@ -87,8 +133,7 @@ function draw() {
     }
     sum.x /= particles.length
     sum.y /= particles.length
-    fill(0)
-    textSize(30)
-    text(currentEmote, sum.x, sum.y)
+    return sum;
 }
+
   
