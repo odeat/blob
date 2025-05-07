@@ -1,3 +1,32 @@
-1. de array et verschilende faces inplementeren (zodat hij niet ieder frame 60 faces laat zien)
+To Do List:
 
+1. De array verschilende faces inplementeren (zodat Blob niet ieder frame 60 faces laat zien)
 2. Dat we een ontzichtbaar punt verbinden
+
+
+Sound effect ideeen:
+
+1. "OUTCH"-sound effect: wanneer Blob de borders aanraakt tijdens dat hij word gesleept door de gebruiker
+2. "POOF" of "PLOF"-sound effect: wanneer Blob is losgelaten door de gebruiker en weer in contact komt met de grond
+3. "YIPPEE"-sound effect: wanneer Blob weer word aangeraakt dan is hij niet verdrietig meer waardoor hij een blij geluid maakt
+4. "WOOOOOO"-sound effect: wanneer Blob word gesingle pressed tijdens functie 1 en dus in de lucht springt
+
+
+Functie 1: Springen bij aanraking
+Wanneer de gebruiker Blob aanraakt, reageert het direct door vrolijk de lucht in te springen 
+met een energieke beweging. Tijdens deze sprong wordt een speels geluidseffect afgespeeld, iets zoals "wooohoooo", 
+om de interactie extra levendig te maken. Door de zwaartekracht valt de blob vervolgens automatisch weer naar beneden, 
+waarbij hij zachtjes stuitert bij de landing (vanwege de geimplementeerde gravitational forces). 
+
+Functie 2: Gevoelsreactie en geluid bij aanraking
+Blob begint met een verdrietige default gezichtsuitdrukking: hij voelt zich eenzaam en genegeerd. 
+Zodra de gebruiker Blob aanraakt bijvoorbeeld om hem op te tillen of te slepen en de methode mousePressed() in de
+code wordt geactiveerd, reageert Blob direct: zijn gezicht verandert naar een blije of derpy uitdrukking én hij laat
+een cute geluidje horen, zoals een enthousiast “yippieee”. 
+
+Functie 3: Slepen met realistische physics
+Wanneer de gebruiker zijn cursor ingedrukt houdt op Blob (via de mousePressed() methode), kan hij worden 
+meegesleept in alle richtingen. Dankzij de integratie van de Toxi physics library beweegt Blob niet statisch mee, 
+maar volgt hij op een realistische manier de cursor, met effecten van zwaartekracht en traagheid. Hierdoor ontstaat een 
+vloeiend en natuurlijk sleepgedrag: Blob veert een beetje na, wordt langwerpig of vervormt tijdens het slepen, en voelt
+alsof hij echt gewicht heeft.

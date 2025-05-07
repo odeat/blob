@@ -4,9 +4,11 @@ const { Vec2D, Rect } = toxi.geom;
 
 let physics;
 
+let invisSprings = [];
+let invisParticle;
 let currentEmote = ""
 let touchedEmote = "˶ˆᗜˆ˵"
-let looseEmote = "•⩊•"
+let looseEmote = "╥﹏╥"
 let emotes = ["╥﹏╥", "•⩊•", "〇_ｏ"]
 let particles = [];
 let springs = [];
@@ -16,8 +18,11 @@ function setup() {
     frameRate(30);
     textAlign(CENTER, CENTER)
     currentEmote = looseEmote;
-
+    
     physics = new VerletPhysics2D();
+    invisParticle = new Particle(mouseX, mouseY);
+    invisParticle.lock();
+
     let gravity = new GravityBehavior(new Vec2D(0, 0.5)); // gravity vector
     physics.addBehavior(gravity);
 
@@ -48,12 +53,40 @@ function setup() {
             springs.push(new Spring(particles[i], particles[j], distance, 0.00020))
         }
     }
+
+    for(let i = 0; i < particles.length; i++){
+        invisSprings.push(new Spring(particles[i], invisParticle, 0, 0.00020))
+    }
 }
   
 function draw() {
-    background("#98FBCB");
+    
+// -------- UPDATE SECTION --------
     physics.update();
+    invisParticle.x = mouseX;
+    invisParticle.y = mouseY;
+    
 
+    if (mouseIsPressed) {
+        currentEmote = touchedEmote;
+        // particles[0].lock();
+        // particles[0].x = mouseX;
+        // particles[0].y = mouseY;
+        // particles[0].unlock();
+        for(let spring of invisSprings){
+            spring.strength = 0.001;
+        }
+    } else{
+        currentEmote = looseEmote
+        for(let spring of invisSprings){
+            spring.strength = 0;
+        }
+    }
+
+// -------- RENDER SECTION --------
+    background("#98FBCB");
+    invisParticle.show();
+    
     // Show all particles
     fill("#F652A0")
     stroke(0)
@@ -70,16 +103,7 @@ function draw() {
     }
 
     // Lock the first particle to the mouse position when pressed
-    if (mouseIsPressed) {
-        currentEmote = touchedEmote;
-        particles[0].lock();
-        particles[0].x = mouseX;
-        particles[0].y = mouseY;
-        particles[0].unlock();
-    } else{
-        currentEmote = looseEmote
-    }
-
+    
     let sum = createVector(0, 0) 
     for(let particle of particles){
         sum.x += particle.x
@@ -87,6 +111,7 @@ function draw() {
     }
     sum.x /= particles.length
     sum.y /= particles.length
+
     fill(0)
     textSize(30)
     text(currentEmote, sum.x, sum.y)
