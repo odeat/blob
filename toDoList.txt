@@ -1,11 +1,9 @@
-- een slider implementeren voor de backgroundMusic
-- misschien een actergrond plaatje(s)
+TO DO LIST:
 
-To Do List:
-
-1. De array verschilende faces inplementeren (zodat Blob niet ieder frame 60 faces laat zien)
-2. Dat we een ontzichtbaar punt verbinden
-3. 
+- Een slider implementeren voor de backgroundMusic
+- Verschilende een achtergrond plaatje(s)
+- ackgroundMusic on repeat door laten lopen (wanneer hij is afgelopen)
+- de plaatjes van de icoontjes (tijdens HOVER) veranderen
 
 Sound effect ideeen:
 
