@@ -20,10 +20,11 @@ let isJumping = false;
 let particles = [];
 let springs = [];
 
-// sounds
-let mySound; // *mlem* 
-let ouchSound; // ow
-let backgroundMusic;
+let mySound; // yoshi-tongue.mp3
+let ouchSound; // yoshi-ow.mp3
+let backgroundMusic; // Versus.mp3
+
+let bgImage; // achtergrond plaatje 
 
 let hasHitBorder = false;
 
@@ -34,6 +35,8 @@ function preload() {
   ouchSound = loadSound('yoshi-pam.mp3');
   backgroundMusic = loadSound('Versus.mp3');
   backgroundMusic.amp(0.1)
+  
+  bgImage = loadImage('windowsXP.png');
 }
 
 sadBlob.addEventListener("click",()=>{
@@ -95,7 +98,8 @@ function setup() {
 }
   
 function draw() {
-    background("#98FBCB");
+    // background("#98FBCB");
+    image(bgImage, 0, 0, width, height);
     physics.update();
 
         // *pam* sound effect als borders worden aangeraakt (maar niet de bodem border)

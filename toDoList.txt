@@ -1,8 +1,7 @@
 TO DO LIST:
 
 - Een slider implementeren voor de backgroundMusic
-- Verschilende een achtergrond plaatje(s)
-- ackgroundMusic on repeat door laten lopen (wanneer hij is afgelopen)
+- backgroundMusic on repeat door laten lopen (wanneer hij is afgelopen)
 - de plaatjes van de icoontjes (tijdens HOVER) veranderen
 - een geluidje afspelen bij het klikken op de icoontjes (vooral het kaomijo icoontje): yoshi yap, yoshi ha
 
