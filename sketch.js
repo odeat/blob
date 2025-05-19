@@ -177,7 +177,7 @@ function mousePressed(){
     mySound.play();
 
     // laat blob springen
-    let jumpForce = -10; // negatieve waarde = omhoog
+    let jumpForce = -10; 
     for (let particle of particles) {
         particle.addForce(new Vec2D(0, jumpForce));
     }
