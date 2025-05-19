@@ -6,9 +6,12 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/addons/p5.sound.min.js"></script>
   </head>
 <body>
-  <div id="canvas-container"></div>
-  <img id="sadBlob" src="./happyBlob.png" width="80" height="80"/>
-  <img id="happyBlob" src="./sadBlob.png" width="80" height="80"/>
+  <div style= "display: flex; justify-content: center;" id="canvas-container"></div>
+  <div style="display: flex; justify-content: center; gap: 30px; margin-top: 10px;">
+    <img id="sadBlob" src="./happyBlob.png" width="80" height="80"/>
+    <img id="happyBlob" src="./sadBlob.png" width="80" height="80"/>
+    <img id="colorChangeBlob" src="./colorChangeBlob.png" width="80" height="80"/>
+  </div>
   <script src="particle.js"></script>
   <script src="spring.js"></script>
   <script src="sketch.js"></script>

@@ -4,11 +4,14 @@ const { Vec2D, Rect } = toxi.geom;
 
 let physics;
 
+let color = "#F652A0"
+let randomColors = ["blue", "yellow", "purple", "#F652A0"]
 
 let holdParticle = null;
 let isHoldingBlob = false;
 let radius = 100;
 let currentEmote = ""
+let jumpEmote = "˶ˆᗜˆ˵"
 let touchedEmote = "˶ˆᗜˆ˵"
 let looseEmote = "•⩊•"
 let emotes = ["╥﹏╥", "•⩊•", "◍ ꒳ ◍", "˵¯͒〰¯͒˵", "✖╭╮✖", "❍ᴥ❍"]
@@ -20,6 +23,7 @@ let springs = [];
 // sounds
 let mySound; // *mlem* 
 let ouchSound; // ow
+let backgroundMusic;
 
 let hasHitBorder = false;
 
@@ -28,6 +32,8 @@ function preload() {
   soundFormats('mp3', 'ogg');
   mySound = loadSound('/yoshi-tongue.mp3');
   ouchSound = loadSound('/yoshi-pam.mp3');
+  backgroundMusic = loadSound('/Versus.mp3');
+  backgroundMusic.amp(0.1)
 }
 
 sadBlob.addEventListener("click",()=>{
@@ -43,9 +49,14 @@ happyBlob.addEventListener("click",()=>{
     looseEmote = random(emotes)
 })
 
+colorChangeBlob.addEventListener("click",()=>{
+    color = random(randomColors)
+})
+
 function setup() {
     let canvas = createCanvas(600, 600);
-    canvas.parent('canvas-container'); // Attach canvas to the container
+    canvas.parent('canvas-container'); // Attach canvas to the containery
+    backgroundMusic.play();
     frameRate(30);
     textAlign(CENTER, CENTER);
     currentEmote = looseEmote;
@@ -87,10 +98,6 @@ function draw() {
     background("#98FBCB");
     physics.update();
 
-    // Show all particles
-    fill("#F652A0")
-    stroke(0)
-
         // *pam* sound effect als borders worden aangeraakt (maar niet de bodem border)
     let hittingBorder = false;
 
@@ -111,7 +118,9 @@ function draw() {
     } else if (!hittingBorder && hasHitBorder) { 
         hasHitBorder = false;
     }
-
+    
+    fill(color)
+    stroke(0)
 
     beginShape()
     for (let particle of particles) {
