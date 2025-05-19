@@ -30,9 +30,9 @@ let hasHitBorder = false;
 // loading the mp3's
 function preload() {
   soundFormats('mp3', 'ogg');
-  mySound = loadSound('./yoshi-tongue.mp3');
-  ouchSound = loadSound('./yoshi-pam.mp3');
-  backgroundMusic = loadSound('./Versus.mp3');
+  mySound = loadSound('yoshi-tongue.mp3');
+  ouchSound = loadSound('yoshi-pam.mp3');
+  backgroundMusic = loadSound('Versus.mp3');
   backgroundMusic.amp(0.1)
 }
 
