@@ -7,7 +7,7 @@ let physics;
 let color = "#F652A0"
 let randomColors = ["blue", "yellow", "purple", "#F652A0"]
 
-let holdParticle = null;
+let holdParticle = null; 
 let isHoldingBlob = false;
 let radius = 100;
 let currentEmote = ""
