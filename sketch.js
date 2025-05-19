@@ -11,21 +11,43 @@ let radius = 100;
 let currentEmote = ""
 let touchedEmote = "˶ˆᗜˆ˵"
 let looseEmote = "•⩊•"
-let emotes = ["╥﹏╥", "•⩊•", "〇_ｏ"]
+let emotes = ["╥﹏╥", "•⩊•", "◍ ꒳ ◍", "˵¯͒〰¯͒˵", "✖╭╮✖", "❍ᴥ❍"]
+let isJumping = false;
+
 let particles = [];
 let springs = [];
 
-let mySound;
+// sounds
+let mySound; // *mlem* 
+let ouchSound; // ow
 
+let hasHitBorder = false;
+
+// loading the mp3's
 function preload() {
   soundFormats('mp3', 'ogg');
   mySound = loadSound('/yoshi-tongue.mp3');
+  ouchSound = loadSound('/yoshi-pam.mp3');
 }
 
+sadBlob.addEventListener("click",()=>{
+    console.log("jump")
+    let jumpForce = -10; // negatieve waarde = omhoog
+    for (let particle of particles) {
+        particle.addForce(new Vec2D(0, jumpForce));       
+    }
+    mySound.play();
+})
+
+happyBlob.addEventListener("click",()=>{
+    looseEmote = random(emotes)
+})
+
 function setup() {
-    createCanvas(600, 600);
+    let canvas = createCanvas(600, 600);
+    canvas.parent('canvas-container'); // Attach canvas to the container
     frameRate(30);
-    textAlign(CENTER, CENTER)
+    textAlign(CENTER, CENTER);
     currentEmote = looseEmote;
 
     physics = new VerletPhysics2D();
@@ -68,6 +90,29 @@ function draw() {
     // Show all particles
     fill("#F652A0")
     stroke(0)
+
+        // *pam* sound effect als borders worden aangeraakt (maar niet de bodem border)
+    let hittingBorder = false;
+
+    for (let particle of particles) {
+        if (
+            particle.x <= 0 || 
+            particle.x + 10 >= width || 
+            particle.y <= 0 // bovenrand
+        ) {
+            hittingBorder = true;
+            break; // 1 particle is genoeg
+        }
+    }
+
+    if (hittingBorder && !hasHitBorder) {
+        ouchSound.play();
+        hasHitBorder = true;
+    } else if (!hittingBorder && hasHitBorder) { 
+        hasHitBorder = false;
+    }
+
+
     beginShape()
     for (let particle of particles) {
         vertex(particle.x, particle.y)
@@ -75,7 +120,7 @@ function draw() {
     } 
     endShape(CLOSE)
 
-    // Show all springs
+    // forloop to show all springs if needed
     for (let spring of springs) {
         // spring.show();
     }
@@ -94,19 +139,44 @@ function draw() {
     let middle = calculateMiddle();
     fill(0)
     textSize(30)
+
+    let margin = 2;
+let touchingGround = false;
+
+for (let particle of particles) {
+    if (particle.y >= height - margin) {
+        touchingGround = true;
+        break;
+    }
+}
+
+if (isJumping && touchingGround && !isHoldingBlob) {
+    isJumping = false;
+    currentEmote = looseEmote;
+}
+
     text(currentEmote, middle.x, middle.y)
 }
 
 function mousePressed(){
-    // console.log("Click")
     let middle = calculateMiddle();
     let mousePos = createVector(mouseX, mouseY);
     let lengte = distance(mousePos, middle);
 
-    if(lengte < radius){
-        isHoldingBlob = true;
-        mySound.play();
+    if (lengte < radius) {
+    isHoldingBlob = true;
+    mySound.play();
+
+    // laat blob springen
+    let jumpForce = -10; // negatieve waarde = omhoog
+    for (let particle of particles) {
+        particle.addForce(new Vec2D(0, jumpForce));
     }
+
+    isJumping = true;
+    currentEmote = jumpEmote;
+    }
+
     
     let sortedParticles = particles.slice().sort((a, b)=>{
         a = createVector(a.x, a.y);
