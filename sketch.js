@@ -5,7 +5,7 @@ const { Vec2D, Rect } = toxi.geom;
 let physics;
 
 let color = "#F652A0"
-let randomColors = ["blue", "yellow", "purple", "#F652A0"]
+let randomColors = ["#66c5cc", "#f6cf71", "#dcb0f2", "#dcb0f2", "#87c55f", "#9eb9f3", "#fe88b1", "#8be0a4", "#b497e7"]
 
 let holdParticle = null; 
 let isHoldingBlob = false;
@@ -14,7 +14,7 @@ let currentEmote = ""
 let jumpEmote = "˶ˆᗜˆ˵"
 let touchedEmote = "˶ˆᗜˆ˵"
 let looseEmote = "•⩊•"
-let emotes = ["╥﹏╥", "•⩊•", "◍ ꒳ ◍", "˵¯͒〰¯͒˵", "✖╭╮✖", "❍ᴥ❍"]
+let emotes = ["╥﹏╥", "￢з￢", "•⩊•", "◍ ꒳ ◍", "˵¯͒〰¯͒˵", "⇀‸↼‶", "❍ᴥ❍", "=＾● ⋏ ●＾=", "ー_ーゞ", "◐ω◑", "≧▽≦", "⁀⊙෴☉⁀"];
 let isJumping = false;
 
 let particles = [];

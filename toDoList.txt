@@ -1,6 +1,5 @@
-canvas size(600, 600)
-- wolkjes toevoegen die langsvliegen
-- misschien een actergrond plaatje
+- een slider implementeren voor de backgroundMusic
+- misschien een actergrond plaatje(s)
 
 To Do List:
 
