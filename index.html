@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <style> 
+    .rainbow-overlay {
+      mix-blend-mode: screen;
+      background: linear-gradient(90deg, 
+        red, orange, yellow, green, blue, indigo, violet, red);
+      background-size: 300% 100%;
+      animation: rainbowMove 6s linear infinite;
+    }
+
+        @keyframes rainbowMove {
+      0% {
+        background-position: 0% 50%;
+      }
+      100% {
+        background-position: 100% 50%;
+      }
+    }
+    </style>
+
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/hapticdata/toxiclibsjs@0.3.2/build/toxiclibs.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.11.3/addons/p5.sound.min.js"></script>
@@ -8,9 +29,9 @@
 <body>
   <div style= "display: flex; justify-content: center;" id="canvas-container"></div>
   <div style="display: flex; justify-content: center; gap: 30px; margin-top: 10px;">
-    <img id="sadBlob" src="./happyBlob.png" width="80" height="80"/>
-    <img id="happyBlob" src="./sadBlob.png" width="80" height="80"/>
-    <img id="colorChangeBlob" src="./colorChangeBlob.png" width="80" height="80"/>
+    <img id="happyBlob" src="./happyBlob.png" width="80" height="80"/>
+    <img id="sadBlob" src="./sadBlob.png" width="80" height="80"/>
+    <img id="colorChangeBlob" class="rainbow-overlay" src="./colorChangeBlob.png" width="80" height="80"/>
   </div>
   <script src="particle.js"></script>
   <script src="spring.js"></script>
