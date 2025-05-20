@@ -23,6 +23,8 @@ let springs = [];
 let mySound; // yoshi-tongue.mp3
 let ouchSound; // yoshi-ow.mp3
 let backgroundMusic; // Versus.mp3
+let yapSound; // yoshi-yap.mp3
+let haSound; // yoshi-ha.mp3
 
 let bgImage; // achtergrond plaatje 
 
@@ -33,33 +35,60 @@ function preload() {
   soundFormats('mp3', 'ogg');
   mySound = loadSound('yoshi-tongue.mp3');
   ouchSound = loadSound('yoshi-pam.mp3');
+  yapSound = loadSound('yoshi-yap.mp3');
+  haSound = loadSound('yoshi-ha.mp3');
   backgroundMusic = loadSound('Versus.mp3');
   backgroundMusic.amp(0.1)
   
   bgImage = loadImage('windowsXP.png');
 }
 
-sadBlob.addEventListener("click",()=>{
+happyBlob.addEventListener("click",()=>{ //eerste icoontje
     console.log("jump")
-    let jumpForce = -10; // negatieve waarde = omhoog
+    let jumpForce = -10;
     for (let particle of particles) {
         particle.addForce(new Vec2D(0, jumpForce));       
     }
+    // isHoldingBlob = true;
     mySound.play();
 })
 
-happyBlob.addEventListener("click",()=>{
-    looseEmote = random(emotes)
+happyBlob.addEventListener("mouseenter", ()=>{
+    happyBlob.src = "jumpyBlob.png";
 })
 
-colorChangeBlob.addEventListener("click",()=>{
+happyBlob.addEventListener("mouseleave", ()=>{
+    happyBlob.src = "happyBlob.png";
+})
+// sadBlob.addEventListener("mouseup", function(event) {
+//     if (event.button === 0) {
+//         isHoldingBlob = false;
+//     }
+//   });
+
+sadBlob.addEventListener("click",()=>{ // tweede icoontje
+    looseEmote = random(emotes)
+    haSound.play();
+})
+
+sadBlob.addEventListener("mouseenter", ()=>{
+    sadBlob.src = "madBlob.png";
+})
+
+sadBlob.addEventListener("mouseleave", ()=>{
+    sadBlob.src = "sadBlob.png";
+})
+
+colorChangeBlob.addEventListener("click",()=>{ // derde icoontje
     color = random(randomColors)
+    yapSound.play();
 })
 
 function setup() {
     let canvas = createCanvas(600, 600);
     canvas.parent('canvas-container'); // Attach canvas to the containery
-    backgroundMusic.play();
+    //backgroundMusic.play();
+    backgroundMusic.loop();
     frameRate(30);
     textAlign(CENTER, CENTER);
     currentEmote = looseEmote;
