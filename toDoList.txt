@@ -7,7 +7,7 @@ Sound effect ideeen:
 1. "OUTCH"-sound effect: wanneer Blob de borders aanraakt tijdens dat hij word gesleept door de gebruiker
 2. "POOF" of "PLOF"-sound effect: wanneer Blob is losgelaten door de gebruiker en weer in contact komt met de grond
 3. "YIPPEE"-sound effect: wanneer Blob weer word aangeraakt dan is hij niet verdrietig meer waardoor hij een blij geluid maakt
-4. "WOOOOOO"-sound effect: wanneer Blob word gesingle pressed tijdens functie 1 en dus in de lucht springt
+4. "WOOOOOO"-sound effect: wanneer Blob word gesingle pressed tijdens functie 1 en dus in de lucht springt 
 
 
 Functie 1: Springen bij aanraking
