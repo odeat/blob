@@ -1,8 +1,5 @@
 TO DO LIST:
 
-- Een slider implementeren voor de backgroundMusic
-- backgroundMusic on repeat door laten lopen (wanneer hij is afgelopen)
-- de plaatjes van de icoontjes (tijdens HOVER) veranderen
 - als je op de jump knopt klikt, zijn gezichtje ook veranderd 
 
 Sound effect ideeen:

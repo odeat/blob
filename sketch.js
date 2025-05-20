@@ -84,6 +84,10 @@ colorChangeBlob.addEventListener("click",()=>{ // derde icoontje
     yapSound.play();
 })
 
+volumeSlider.addEventListener("input", (e)=>{
+    backgroundMusic.amp(e.target.valueAsNumber)
+})
+
 function setup() {
     let canvas = createCanvas(600, 600);
     canvas.parent('canvas-container'); // Attach canvas to the containery
